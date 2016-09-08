@@ -1,7 +1,5 @@
 import { Attribute, Directive, forwardRef, Input, OnChanges, SimpleChanges, Provider } from '@angular/core';
 import { AbstractControl, NG_VALIDATORS, Validator, ValidatorFn, FormControl } from '@angular/forms';
-// import { isPresent } from '@angular/forms/src/facade/lang';
-
 
 export const MIN_VALUE_VALIDATOR: any = {
 	provide: NG_VALIDATORS,
@@ -21,13 +19,13 @@ export class MinValueValidator implements Validator, OnChanges {
 	@Input() min:string;
 
 	constructor(@Attribute('min') mn:string) {
-//		if (isPresent(mn)) {
+		if (mn !== undefined && mn !== null) {	// isPresent
 			const attrValue = parseInt(mn, 10);
 			if (!isNaN(attrValue)) {
 				this.min = mn;
 				this._createValidator();
 			}
-//		}
+		}
 	}
 
 	ngOnChanges(changes:SimpleChanges) {
@@ -46,7 +44,6 @@ export class MinValueValidator implements Validator, OnChanges {
 	static min(mn:number) : ValidatorFn {
 		return (control: AbstractControl): {[key: string]: any} => {
 			let v = +control.value;
-//			return (v < mn ? { 'min' : { 'valid' : false } } : null);
 			return (v < mn ? { 'min' : { 'minValue' : mn, 'actualValue' : v }} : null);
 		};
 	}

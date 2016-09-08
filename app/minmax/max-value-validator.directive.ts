@@ -1,6 +1,5 @@
 import { Attribute, Directive, forwardRef, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { AbstractControl, NG_VALIDATORS, Validator, ValidatorFn, FormControl } from '@angular/forms';
-// import { isPresent } from '@angular/forms/src/facade/lang';
 
 
 export const MAX_VALUE_VALIDATOR: any = {
@@ -21,13 +20,13 @@ export class MaxValueValidator implements Validator, OnChanges {
 	@Input() max:string;
 
 	constructor(@Attribute('max') mx:string) {
-//		if (isPresent(mx)) {
+		if (mx !== undefined && mx !== null) {	// isPresent
 			const attrValue = parseInt(mx, 10);
 			if (!isNaN(attrValue)) {
 				this.max = mx;
 				this._createValidator();
 			}
-//		}
+		}
 	}
 
 	ngOnChanges(changes:SimpleChanges) {
@@ -46,7 +45,6 @@ export class MaxValueValidator implements Validator, OnChanges {
 	static max(mx:number) : ValidatorFn {
 		return (control: AbstractControl): {[key: string]: any} => {
 			let v = +control.value;
-//			return (v > mx ? { 'max' : { 'valid' : false } } : null);
 			return (v > mx ? { 'max' : { 'maxValue' : mx, 'actualValue' : v }} : null);
 		};
 	}
