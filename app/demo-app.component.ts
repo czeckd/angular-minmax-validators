@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 	<div style="margin:25px;" [ngClass]="{ 'has-error' :  val.errors}" >
 		<form>
 			<label>Number</label>
-			<input class="form-control" name="val" #val="ngModel" type="number" min="0" max="10" [(ngModel)]="numval" >
+			<input class="form-control" name="val" #val="ngModel" type="number" [min]="minv" [max]="maxv" [(ngModel)]="numval" >
 		</form>
 	</div>
 <p *ngIf="val.errors">{{val.errors | json}}</p>
