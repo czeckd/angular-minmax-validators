@@ -1,23 +1,59 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
 	selector: 'demo-app',
 	template:`
 <div class="container-fluid">
-	<div style="margin:25px;" [ngClass]="{ 'has-error' :  val.errors}" >
-		<form>
-			<label>Number</label>
+	<p></p>
+	<div class="col-md-5">
+		<form class="form-inline">
+			<div class="form-group">
+				<label>Min</label>
+				<input name="min" type="number" class="form-control" [(ngModel)]="minv" (ngModelChange)="fixMin()">
+			</div>
+			<div class="form-group">
+				<label>Max</label>
+				<input name="max" type="number" class="form-control" [(ngModel)]="maxv" (ngModelChange)="fixMax()">
+			</div>
+		</form>
+
+		<form [ngClass]="{ 'has-error' :  val.errors}" #valForm="ngForm" >
+			<label>Number between {{minv}} and {{maxv}}</label>
 			<input class="form-control" name="val" #val="ngModel" type="number" [min]="minv" [max]="maxv" [(ngModel)]="numval" >
 		</form>
+		<div *ngIf="val.errors">
+			<label>Error</label>
+			<p>{{val.errors | json}}</p>
+		</div>
 	</div>
-<p *ngIf="val.errors">{{val.errors | json}}</p>
 </div>
 `
 })
 
 export class DemoAppComponent {
+	@ViewChild('valForm') vform:NgForm;
+
 	private minv:number = 0;
 	private maxv:number = 10;
+	private numval:number = -5;
 
-	private numval:number = 0;
+	fixMin() {
+		if (this.minv >= this.maxv) {
+			this.maxv = this.minv + 1;
+		}
+		this.updateVal();
+	}
+
+	fixMax() {
+		if (this.maxv <= this.minv) {
+			this.minv = this.maxv - 1;
+		}
+		this.updateVal();
+	}
+
+	private updateVal() {
+		this.vform.form.controls['val'].updateValueAndValidity();
+	}
+
 }
