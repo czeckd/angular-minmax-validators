@@ -11,9 +11,11 @@ A [working demo](https://czeckd.github.io/angular2-minmax-validators/demo/) show
 
 #### Usage
 
-On an input field, set ``min="NUMBER"`` and/or ``max="NUMBER"`` where "NUMBER" is an integer. The validators also works with property binding, so ``[min]="VARIABLE"``
+On an input field, set ``min="NUMBER"`` and/or ``max="NUMBER"`` where "NUMBER" is a number. The validators also works with property binding, so ``[min]="VARIABLE"``
 and/or ``[max]="VARIABLE"`` where "VARIABLE" is "VARIABLE" is a local class variable. See ``demo-app.component.ts`` 
 for an example.
+
+Note: I've not tested this directive with date/times.
 
 ### License
 
