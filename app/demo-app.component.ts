@@ -7,7 +7,7 @@ import { NgForm } from '@angular/forms';
 <div class="container-fluid">
 	<p></p>
 	<div class="col-md-5">
-		<form class="form-inline">
+		<form class="form-inline row gutter">
 			<div class="form-group">
 				<label>Min</label>
 				<input name="min" type="number" class="form-control" [(ngModel)]="minv" (ngModelChange)="fixMin()">
@@ -18,11 +18,11 @@ import { NgForm } from '@angular/forms';
 			</div>
 		</form>
 
-		<form [ngClass]="{ 'has-error' :  val.errors}" #valForm="ngForm" >
+		<form class="row gutter" [ngClass]="{ 'has-error' :  val.errors}" #valForm="ngForm" >
 			<label>Number between {{minv}} and {{maxv}}</label>
 			<input class="form-control" name="val" #val="ngModel" type="number" [min]="minv" [max]="maxv" [(ngModel)]="numval" >
 		</form>
-		<div *ngIf="val.errors">
+		<div *ngIf="val.errors" class="row gutter">
 			<label>Error</label>
 			<p>{{val.errors | json}}</p>
 		</div>
