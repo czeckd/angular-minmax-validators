@@ -1,4 +1,4 @@
-# angular2-minmax-validators
+# angular-minmax-validators
 
 Implementation of min/max value validator directives for Angular 2.0.0 that works with both Angular
 forms validation and the DOM. As best as I can tell, these two validator directives are absent from 
