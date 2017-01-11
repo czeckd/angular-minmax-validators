@@ -7,7 +7,7 @@ the initial Angular 2.0.0 [@angular/forms/src/validators.ts]
 
 ### Demo
 
-A [working demo](https://czeckd.github.io/angular2-minmax-validators/demo/) shows the validators in action.
+A [working demo](https://czeckd.github.io/angular-minmax-validators/demo/) shows the validators in action.
 
 #### Usage
 
